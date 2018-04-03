@@ -11,8 +11,8 @@ const setRouters = () => {
     let url = './router' + moduleUrl
     if (fs.existsSync(url)) {
       const router = require('.' + moduleUrl)
-      Router[router.method](key + router.path, router.router)
-      console.log(`添加路由${ key + router.path }: ${ router.method }`)
+      Router[router.method]('/' + key.toLowerCase() + router.path, router.router)
+      console.log(`添加路由${'/' + key.toLowerCase() + router.path }: ${ router.method }`)
     }
   })
   return Router.routes()

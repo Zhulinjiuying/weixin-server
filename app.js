@@ -4,6 +4,7 @@ const setRouters = require('./router/routerLoader')
 
 const app = new Koa()
 
+app.use(koaBody())
 app.use(setRouters())
 
 app.listen(8088, () => {
