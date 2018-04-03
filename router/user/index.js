@@ -1,11 +1,23 @@
-const postLoginController = require('../../controller/user/index')
+const postUserController = require('../../controller/user/postUserController')
+const getUserController = require('../../controller/user/getUserController')
 
-const postLogin = async (ctx, next) => {
-  postLoginController(ctx)
+const postUser = async (ctx, next) => {
+  postUserController(ctx)
 }
 
-module.exports = {
-  router: postLogin,
-  path: '',
-  method: 'post'
+const getUser = async (ctx, next) => {
+  getUserController(ctx)
 }
+
+module.exports = [
+  {
+    router: postUser,
+    path: '',
+    method: 'post'
+  },
+  {
+    router: getUser,
+    path: '',
+    method: 'get'
+  }
+]
