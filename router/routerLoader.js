@@ -4,17 +4,26 @@ const list = require('./routerList')
 
 const Router = new router()
 
+// 添加router
+const addRouters = (routers, key) => {
+  for (let router of routers) {
+    Router[router.method]('/' + key.toLowerCase() + router.path, router.router)
+    console.log(`添加路由${'/' + key.toLowerCase() + router.path } : ${ router.method }`)
+  }
+}
+
 // 遍历添加router
 const setRouters = () => {
   Object.keys(list).forEach((key) => {
-    let moduleUrl = `/${ key.toLowerCase() }/index.js`
-    let url = './router' + moduleUrl
-    if (fs.existsSync(url)) {
-      const routers = require('.' + moduleUrl)
-      for (let router of routers) {
-        Router[router.method]('/' + key.toLowerCase() + router.path, router.router)
-        console.log(`添加路由${'/' + key.toLowerCase() + router.path } : ${ router.method }`)
-      }
+    let baseUrl = `./router/${ key.toLowerCase() }/`
+    let moduleUrl = baseUrl + 'index.js'
+    if (fs.existsSync(moduleUrl)) {
+      let routers = require('.'+ moduleUrl)
+      addRouters(routers, key)
+    }
+    for (let routerName of list[key]) {
+      let routers = require('.' + baseUrl + routerName)
+      addRouters(routers, key)
     }
   })
   return Router.routes()

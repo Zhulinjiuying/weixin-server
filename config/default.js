@@ -7,5 +7,5 @@ module.exports = {
   },
   appId: '',
   appSecret: '',
-  mongodb: 'mongodb://localhost:27017/dollmachine'
+  mongodb: 'mongodb://localhost:27017/test'
 }
