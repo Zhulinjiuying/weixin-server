@@ -7,5 +7,9 @@ module.exports = {
   },
   appId: '',
   appSecret: '',
-  mongodb: 'mongodb://localhost:27017/test'
+  mongodb: {
+    url: 'mongodb://localhost:27017',
+    db: 'test',
+    collection: 'sessions',
+  }
 }
