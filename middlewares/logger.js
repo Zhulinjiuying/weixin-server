@@ -4,7 +4,6 @@ const moment = require('moment')
 const logger = (path) => {
   return (info) => {
     let date = moment().format('lll')
-    console.log(path)
     fs.writeFileSync(path, `${ date } : ${ info }\n`, {
       flag: 'a'
     })
@@ -12,12 +11,15 @@ const logger = (path) => {
 }
 
 const init = () => {
+  if (!fs.existsSync('./logs')) {
+    fs.mkdirSync('./logs')
+  } 
   global.log = logger(getPath())
 }
 
 const getPath = () => {
   let date = moment().format('YYYY-MM-DD')
-  path = `./logs/${date}.md`
+  path = `./logs/${date}.log`
   return path
 }
 
