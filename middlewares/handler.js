@@ -6,5 +6,6 @@ module.exports = async (ctx, next) => {
     ctx.response.body = {
       message: err.message
     }
+    log(err.message, 'error')
   }
 }

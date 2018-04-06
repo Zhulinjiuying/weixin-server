@@ -5,5 +5,10 @@ const getOpenid = require('../../service/getOpenid')
 module.exports = async (ctx) => {
   let openid = ''
   const body = ctx.request.body
-  openid = await getOpenid(body.openid)
+  if (body.openid) {
+    openid = await getOpenid(body.openid)
+
+  } else {
+    ctx.throw(500,'opendis is null')
+  }
 }

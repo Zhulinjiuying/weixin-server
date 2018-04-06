@@ -4,9 +4,12 @@ const moment = require('moment')
 
 // 返回logger的偏函数
 const logger = (path) => {
-  return (info) => {
+  return (info, level = 'info') => {
+    if (!(level in ['info', 'warning', 'error'])) {
+      level = 'info'
+    }
     let date = moment().format('lll')
-    fs.writeFileSync(path, `${ date } : ${ info }\n`, {
+    fs.writeFileSync(path, `[${ level }]${ date } : ${ info }\n`, {
       flag: 'a'
     })
   }
