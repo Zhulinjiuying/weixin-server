@@ -31,5 +31,5 @@ app.use(setRouters())
 
 app.listen(8088, () => {
   logger.init()
-  console.log('服务器启动')
+  log('server started')
 })

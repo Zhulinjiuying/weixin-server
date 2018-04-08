@@ -8,7 +8,7 @@ const Router = new router()
 const addRouters = (routers, key) => {
   for (let router of routers) {
     Router[router.method]('/' + key.toLowerCase() + router.path, router.router)
-    console.log(`添加路由${'/' + key.toLowerCase() + router.path } : ${ router.method }`)
+    log(`add router : ${'/' + key.toLowerCase() + router.path } : ${ router.method }`)
   }
 }
 
