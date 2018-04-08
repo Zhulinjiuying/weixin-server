@@ -14,8 +14,8 @@ module.exports = async (ctx) => {
     if (!user) {
       let user = {
         id: openid,
-        avatarurl: ctx.request.avatarUrl,
-        nickname: ctx.request.nickName
+        avatarurl: body.avatarUrl,
+        nickname: body.nickName
       }
       let result = await createUser(user)
       user = result.ops[0]

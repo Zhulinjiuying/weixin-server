@@ -21,6 +21,8 @@
     "iconv-lite": "^0.4.19",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
     "koa-session-mongo2": "^1.1.1",
