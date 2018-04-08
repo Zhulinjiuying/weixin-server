@@ -22,10 +22,10 @@ app.use(session({
       url: config.mongodb.url,
       db: config.mongodb.db,
       collection: config.mongodb.collection,
-      maxAge: config.maxAge
+      maxAge: config.session.maxAge
   }),
   signed:false,
-  maxAge: config.maxAge
+  maxAge: config.session.maxAge
 },app))
 app.use(setRouters())
 

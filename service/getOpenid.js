@@ -19,9 +19,6 @@ module.exports = async (code) => {
         var result = iconv.decode(buff, 'utf8')
         resolve(JSON.parse(result).openid)
       })
-    }).on('error', function (err) {
-      console.log('error in getOpenid', err)
-      callback.apply(null)
     })
   })
   return promise
