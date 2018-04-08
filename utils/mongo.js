@@ -2,7 +2,7 @@ const config = require('config-lite')(__dirname)
 const Mongolass = require('mongolass')
 
 const mongolass = new Mongolass()
-mongolass.connect(mongolass.connect(config.mongodb.url + '/' + config.mongodb.db))
+mongolass.connect(config.mongodb.url + '/' + config.mongodb.db)
 
 mongolass.plugin('addCreatedAt', {
   afterFind: function (results) {
