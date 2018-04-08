@@ -1,4 +1,4 @@
-const mogolass = require('../utils/mongo')
+const mongolass = require('../utils/mongo')
 
 const User = mongolass.model('User', {
   id: { type: 'string', required: true},
