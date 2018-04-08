@@ -1,6 +1,6 @@
 const mogolass = require('../utils/mongo')
 
-const User = mongolas.model('User', {
+const User = mongolass.model('User', {
   id: { type: 'string', required: true},
   nickname: { type: 'string', default: ' '},
   avatarurl: { type: 'string', default: '' }
