@@ -10,12 +10,12 @@ User.index({ id: 1 }, { unique: true }).exec()
 
 module.exports = {
   // 注册一个用户
-  create: function create (user) {
+  create: (user) => {
     return User.create(user).exec()
   },
 
   // 通过用户名(openid)获取用户信息
-  getUserByName: function getUserByName (openid) {
+  getUserByName: (openid) => {
     return User
       .findOne({ id: openid })
       .addCreatedAt()
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   // 通过ID获取用户名
-  getUserById: function getUserById (id) {
+  getUserById: (id) => {
     return User
       .findOne({ _id: id })
       .addCreatedAt()
