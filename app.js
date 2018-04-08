@@ -16,7 +16,7 @@ app.keys = [config.session.keys]
 app.use(serve(path.join(__dirname, 'public')))
 app.use(koaBody())
 app.use(handler)
-app.use(logger.log)
+app.use(logger)
 app.use(session({
   store: new MongoStore({
       url: config.mongodb.url,
@@ -30,6 +30,9 @@ app.use(session({
 app.use(setRouters())
 
 app.listen(8088, () => {
-  logger.init()
   log('server started')
+})
+
+app.on('close', () => {
+  log('server closed')
 })

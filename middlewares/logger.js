@@ -30,13 +30,12 @@ const getPath = () => {
   return path
 }
 
-module.exports = {
-  init: init,
-  log: async (ctx, next) => {
-    if (!fs.existsSync(getPath())) {
-      init()
-    }
-    log(`${ ctx.request.host } ${ ctx.request.method } ${ ctx.request.url }`)
-    await next()
+init()
+
+module.exports = async (ctx, next) => {
+  if (!fs.existsSync(getPath())) {
+    init()
   }
+  log(`${ ctx.request.host } ${ ctx.request.method } ${ ctx.request.url }`)
+  await next()
 }
