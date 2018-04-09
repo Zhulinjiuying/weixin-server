@@ -1,6 +1,5 @@
 const getOpenid = require('../../service/getOpenid')
-const getUser = require('../../service/getUser')
-const createUser = require('../../service/createUser')
+const UserModel = require('../../models/users')
 
 // /user的controller函数，用于获取微信openid
 
@@ -9,7 +8,7 @@ module.exports = async (ctx) => {
   const body = ctx.request.body
   if (body.openid) {
     openid = await getOpenid(body.openid)
-    let user = await getUser(openid)
+    let user = await UserModel.getUserByName(openid)
     // 查不到用户，新建用户
     if (!user) {
       let user = {
@@ -17,7 +16,7 @@ module.exports = async (ctx) => {
         avatarurl: body.avatarUrl,
         nickname: body.nickName
       }
-      let result = await createUser(user)
+      let result = await UserModel.create(user)
       user = result.ops[0]
       delete user.id 
       ctx.session.user = user
@@ -25,6 +24,8 @@ module.exports = async (ctx) => {
       delete user.id
       ctx.session.user = user
     }
+    ctx.response.body = 'OK'
+    ctx.response.status = 200
   } else {
     ctx.throw(500,'openid is null')
   }

@@ -2,7 +2,7 @@ const postUserController = require('../../controller/user/postUserController')
 const getUserController = require('../../controller/user/getUserController')
 
 const postUser = async (ctx, next) => {
-  postUserController(ctx)
+  await postUserController(ctx)
 }
 
 const getUser = async (ctx, next) => {

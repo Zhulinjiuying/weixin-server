@@ -5,7 +5,7 @@ const moment = require('moment')
 // 返回logger的偏函数
 const logger = (path) => {
   return (info, level = 'info') => {
-    if (!(level in ['info', 'warning', 'error'])) {
+    if (['info', 'warning', 'error'].indexOf(level) == -1) {
       level = 'info'
     }
     let date = moment().format('lll')

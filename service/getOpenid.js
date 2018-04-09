@@ -17,7 +17,7 @@ module.exports = async (code) => {
       res.on('end', function () {
         var buff = Buffer.concat(datas, size)
         var result = iconv.decode(buff, 'utf8')
-        log(result, 'warnning')
+        log(result, 'warning')
         resolve(JSON.parse(result).openid)
       })
     })
