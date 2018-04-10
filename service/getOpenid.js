@@ -2,7 +2,11 @@ const https = require('https')
 const iconv = require('iconv-lite')
 const config = require('config-lite')(__dirname)
 
-// 发送微信OPENID获取确认信息
+/**
+ * [微信获取openid]
+ * @param  {string}  code [小程序返回的code]
+ * @return {promise}      [description]
+ */
 
 module.exports = async (code) => {
   url = `https://api.weixin.qq.com/sns/jscode2session?appid=${ config.appId }&secret=${ config.appSecret }&js_code=${ code }&grant_type=authorization_code`
