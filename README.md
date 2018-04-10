@@ -6,7 +6,12 @@
 
 ---
 ### 运行方式
-> 安装nodejs和mongodb<br>
-  在config/default.js中配置小程序的appid和appSecret<br>
-  安装环境 npm install<br>
-  运行 node app<br>
+>  安装nodejs和mongodb<br>
+
+使用：将该repository克隆到本地目录，运行
+
+```npm install```
+
+在config/default.js中配置小程序的appid和appSecret并启动mongodb数据库，运行
+
+```node app```
