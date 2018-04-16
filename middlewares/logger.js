@@ -9,8 +9,12 @@ const logger = (path) => {
       level = 'info'
     }
     let date = moment().format('lll')
-    fs.writeFileSync(path, `[${ level }]${ date } : ${ info }\n`, {
+    fs.writeFile(path, `[${ level }]${ date } : ${ info }\n`, {
       flag: 'a'
+    }, (err) => {
+      if (err) {
+        console.log('The logger isnt write')
+      }
     })
   }
 }
