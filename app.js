@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const path = require('path')
+var cors = require('koa2-cors')
 const serve = require('koa-static')
 const config = require('config-lite')(__dirname)
 const koabody = require('koa-body')
@@ -26,6 +27,20 @@ app.use(session({
   signed: false,
   maxAge: config.session.maxAge
 },app))
+app.use(cors({
+  origin: function(ctx) {
+    if (ctx.url === '/api') {
+      return '*'
+    } else {
+      return false
+    }
+  },
+  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+  maxAge: 5,
+  credentials: true,
+  allowMethods: ['GET', 'POST', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}))
 app.use(koabody())
 app.use(setRouters())
 
