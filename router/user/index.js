@@ -12,12 +12,10 @@ const getUser = async (ctx, next) => {
 module.exports = [
   {
     router: postUser,
-    path: '',
     method: 'post'
   },
   {
     router: getUser,
-    path: '',
     method: 'get'
   }
 ]

@@ -1,19 +1,20 @@
 const fs = require('fs')
+const path = require('path')
 const moment = require('moment')
 
 
 // 返回logger的偏函数
-const logger = (path) => {
+const logger = (pathUrl) => {
   return (info, level = 'info') => {
     if (['info', 'debug', 'warning', 'error'].indexOf(level) == -1) {
       level = 'info'
     }
     let date = moment().format('lll')
-    fs.writeFile(path, `[${ level }]${ date } : ${ info }\n`, {
+    fs.writeFile(pathUrl, `[${ level }]${ date } : ${ info }\n`, {
       flag: 'a'
     }, (err) => {
       if (err) {
-        console.log('The logger isnt write')
+        console.log('The logger isn\'t write: ', err)
       }
     })
   }
@@ -30,8 +31,8 @@ const init = () => {
 // 取得保存地址
 const getPath = () => {
   let date = moment().format('YYYY-MM-DD')
-  path = `./logs/${date}.log`
-  return path
+  let pathUrl = path.join(path.resolve('./'), `/logs/${date}.log`)
+  return pathUrl
 }
 
 init()

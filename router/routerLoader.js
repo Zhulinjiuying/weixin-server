@@ -1,31 +1,43 @@
 const fs = require('fs')
+const path = require('path')
 const router = require('koa-router')
-const list = require('./routerList')
 
 const Router = new router()
 
+/*  扫描文件
+    如果是文件则执行addRouter添加路由
+    如果是文件夹则迭代执行扫描
+*/
+const scanFile = (url) => {
+  let fileList = fs.readdirSync(url)
+  for (file of fileList) {
+    let item = fs.statSync(url + file)
+    if (!item.isDirectory()) {
+      addRouter(url, file)
+    } else {
+      scanFile(url + file + '/')
+    }
+  }
+}
+
 // 添加router
-const addRouters = (routers, key) => {
-  for (let router of routers) {
-    Router[router.method]('/' + key.toLowerCase() + router.path, router.router)
-    log(`add router : ${'/' + key.toLowerCase() + router.path } : ${ router.method }`)
+const addRouter = (url, file) => {
+  if (file === 'index.js') {
+    let routers = require(url + file)
+    for (let router of routers) {
+      let routerUrl = url.substring(1, url.length + 1)
+      Router[router.method](routerUrl, router.router)
+      log(`add router : ${routerUrl} : ${ router.method }`)
+    }
   }
 }
 
 // 遍历添加router
 const setRouters = () => {
-  Object.keys(list).forEach((key) => {
-    let baseUrl = `./router/${ key.toLowerCase() }/`
-    let moduleUrl = baseUrl + 'index.js'
-    if (fs.existsSync(moduleUrl)) {
-      let routers = require('.'+ moduleUrl)
-      addRouters(routers, key)
-    }
-    for (let routerName of list[key]) {
-      let routers = require('.' + baseUrl + routerName)
-      addRouters(routers, key)
-    }
-  })
+  let pathname = path.resolve('./')
+  process.chdir(pathname + path.sep + 'router')
+  scanFile('./')
+  process.chdir(pathname)
   return Router.routes()
 }
 
