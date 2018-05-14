@@ -29,7 +29,7 @@ app.use(session({
 },app))
 app.use(cors({
   origin: function(ctx) {
-    if (ctx.url === '/api') {
+    if (ctx.url.indexOf('/api') !== -1) {
       return '*'
     } else {
       return false
